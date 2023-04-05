@@ -10,6 +10,12 @@ with open('vectorizer.pkl', 'rb') as f:
 
 # Define a function to predict whether a URL is phishing or not
 def predict_phishing(url):
+    # Remove "http://" or "https://" if present
+    if url.startswith("http://"):
+        url = url[7:]
+    elif url.startswith("https://"):
+        url = url[8:]
+
     # Vectorize the URL using the pickled vectorizer
     url_vectorized = vectorizer.transform([url])
 
@@ -27,3 +33,10 @@ url = st.text_input("Enter a URL to check")
 if st.button("Check"):
     result = predict_phishing(url)
     st.write(result)
+
+# Add a footer with social media links
+st.markdown("---")
+st.write("Follow me on social media:")
+st.write("[Twitter](https://twitter.com/theprasenjeet)")
+st.write("[LinkedIn](https://www.linkedin.com/in/theprasenjeet)")
+st.write("[GitHub](https://github.com/theprasenjeet)")
