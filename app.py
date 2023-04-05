@@ -1,24 +1,37 @@
-import pickle
 import streamlit as st
-import numpy as np
-# Load the model
+import pandas as pd
+import pickle
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Load the trained model from disk
 with open('phishing_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+    clf = pickle.load(f)
+
+# Load the vectorizer from disk
+with open('vectorizer.pkl', 'rb') as f:
+    vectorizer = pickle.load(f)
+
+# Define a function to make predictions
+def predict(url):
+    # Vectorize the URL using the pre-trained vectorizer
+    url_vectorized = vectorizer.transform([url])
+    
+    # Make the prediction using the pre-trained classifier
+    prediction = clf.predict(url_vectorized)[0]
+    
+    # Map the predicted label back to "good" or "bad"
+    if prediction == 0:
+        return "good"
+    else:
+        return "bad"
 
 # Create the Streamlit app
-st.write('# Phishing Website Prediction')
+st.title("Phishing Website Detector")
 
-url = st.text_input('Enter a website URL')
+# Get input from the user
+url = st.text_input("Enter a website URL to check")
 
-if st.button("Predict"):
-        # Reshape the input data to have shape (1, )
-        input_data = np.array([url]).reshape(1, )
-
-        # Make the prediction
-        prediction = model.predict(input_data)[0]
-
-        # Show the prediction
-        if prediction == 'good':
-            st.success("This website is safe!")
-        else:
-            st.warning("This website is a phishing website!")
+# Make a prediction and display the result
+if url:
+    prediction = predict(url)
+    st.write(f"The website {url} is {prediction}.")
