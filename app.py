@@ -46,36 +46,23 @@ if st.button("Check"):
 # =========================================================================================
 #                                           Footer
 # =========================================================================================
-st.markdown("---")
-st.write("Follow me on social media:")
-st.write("[Twitter](https://twitter.com/theprasenjeet)")
-st.write("[LinkedIn](https://www.linkedin.com/in/theprasenjeet)")
-st.write("[GitHub](https://github.com/theprasenjeet)")
-
-
-footer="""<style>
-a:link , a:visited{
-color: white;
-background-color: transparent;
-text-decoration: underline;
-}
-a:hover,  a:active {
-color: red;
-background-color: transparent;
-text-decoration: underline;
-}
-.footer {
-position: fixed;
-left: 0;
-bottom: 0;
-width: 100%;
-background-color: black;
-color: white;
-text-align: center;
-}
-</style>
-<div class="footer">
-<p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://github.com/theprasenjeet" target="_blank">Prasen Jeet</a></p>
-</div>
-"""
-st.markdown(footer,unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .footer {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 12px;
+        color: #7e7e7e;
+    }
+    .footer a {
+        color: #7e7e7e;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+st.markdown(
+    '<div class="footer">Created by Prasenjeet - Connect with me on <a href="https://twitter.com/theprasenjeet" target="_blank">Twitter</a> and <a href="https://linkedin.com/in/theprasenjeet" target="_blank">LinkedIn</a></div>',
+    unsafe_allow_html=True
+)
