@@ -32,9 +32,9 @@ def predict_phishing(url):
     
     # Highlight and make the prediction bold
     if prediction == 1:
-        return "<span style='color:red;font-weight:bold;'>Alert! ⚠️Phishing Website</span>"
+        return "Alert! ⚠️Phishing Website"
     else:
-        return "<span style='color:green;font-weight:bold;'>🛡️ Not a phishing website</span>"
+        return "🛡️ Not a phishing website"
 
 
 # Set up the Streamlit app
