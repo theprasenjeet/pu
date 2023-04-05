@@ -42,9 +42,40 @@ if st.button("Check"):
     result = predict_phishing(url)
     st.write(result)
 
-# Add a footer with social media links
+        
+# =========================================================================================
+#                                           Footer
+# =========================================================================================
 st.markdown("---")
 st.write("Follow me on social media:")
 st.write("[Twitter](https://twitter.com/theprasenjeet)")
 st.write("[LinkedIn](https://www.linkedin.com/in/theprasenjeet)")
 st.write("[GitHub](https://github.com/theprasenjeet)")
+
+
+footer="""<style>
+a:link , a:visited{
+color: white;
+background-color: transparent;
+text-decoration: underline;
+}
+a:hover,  a:active {
+color: red;
+background-color: transparent;
+text-decoration: underline;
+}
+.footer {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: black;
+color: white;
+text-align: center;
+}
+</style>
+<div class="footer">
+<p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://github.com/theprasenjeet" target="_blank">Prasen Jeet</a></p>
+</div>
+"""
+st.markdown(footer,unsafe_allow_html=True)
