@@ -1,24 +1,33 @@
 import streamlit as st
 import requests
 
-# Define the Streamlit app
-st.title('Phishing Detector')
-st.write('Enter a URL to check if it is a phishing website or not.')
+# Define the API endpoint URL and parameters
+API_URL = "https://openphish.com/api/v1/"
+API_ACTION = "search"
+API_PARAMS = {"url": None}
 
-# Define the input field for the user to enter a URL
-input_url = st.text_input('URL')
+st.title("Phishing Website Detector")
 
-# Define the API endpoint to call
-api_url = 'https://api.phishstats.info/v1/url/check'
+# Get the user input URL
+url = st.text_input("Enter a website URL:")
 
-# Perform phishing detection when the user clicks the button
-if st.button('Check'):
-    # Call the API to check if the URL is a phishing website or not
-    response = requests.post(api_url, json={'url': input_url})
-    data = response.json()
+# Check if the user has entered a URL
+if url:
+    # Update the API parameters with the user input URL
+    API_PARAMS["url"] = url
     
-    # Display the phishing detection result to the user
-    if data['in_database'] and data['verified']:
-        st.write('The URL is a phishing website.')
+    # Call the OpenPhish API and get the response
+    response = requests.get(API_URL + API_ACTION, params=API_PARAMS)
+    
+    # Check if the API call was successful
+    if response.ok:
+        # Parse the JSON response and get the result
+        result = response.json()["url"]
+        
+        # Check if the URL is a phishing website or not
+        if result["in_database"]:
+            st.error("The URL is a phishing website.")
+        else:
+            st.success("The URL is not a phishing website.")
     else:
-        st.write('The URL is not a phishing website.')
+        st.error("An error occurred while connecting to the OpenPhish API.")
