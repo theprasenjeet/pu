@@ -1,6 +1,14 @@
 import streamlit as st
 import pickle
 
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+
 # Load the pickled model and vectorizer
 with open('phishing_model.pkl', 'rb') as f:
     clf = pickle.load(f)
