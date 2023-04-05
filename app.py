@@ -29,10 +29,13 @@ def predict_phishing(url):
 
     # Use the pickled model to make a prediction
     prediction = clf.predict(url_vectorized)[0]
+    
+    # Highlight and make the prediction bold
     if prediction == 1:
-        return "Phishing"
+        return "<span style='color:red;font-weight:bold;'>Alert! ⚠️Phishing Website</span>"
     else:
-        return "Not phishing"
+        return "<span style='color:green;font-weight:bold;'>🛡️ Not a phishing website</span>"
+
 
 # Set up the Streamlit app
 st.title("Phishing Website Detector")
