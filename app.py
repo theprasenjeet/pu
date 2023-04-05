@@ -1,20 +1,16 @@
 import pickle
 import streamlit as st
-import numpy as np
 
 # Load the model
 with open('phishing_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
-# Define the Streamlit app
-def app():
-    st.set_page_config(page_title="Phishing Website Detector", page_icon=":guardsman:", layout="centered")
+# Create the Streamlit app
+st.write('# Phishing Website Prediction')
 
-    st.title("Phishing Website Detector")
+url = st.text_input('Enter a website URL')
 
-    url = st.text_input("Enter the website URL:")
-
-    if st.button("Predict"):
+if st.button("Predict"):
         # Reshape the input data to have shape (1, )
         input_data = np.array([url]).reshape(1, )
 
